@@ -16,7 +16,7 @@ app.use(cors())
 
 //routes
 // app.use('/users', require('./routes/users'));
-app.use('/', require('./routes/transactions'));
+// app.use('/', require('./routes/transactions'));
 readdirSync('./routes').map((route) => app.use('/api', require('./routes/' + route)))
 
 const server = () => {
