@@ -1,18 +1,17 @@
 const Expense = require('../models/ExpenseModel');
 
 exports.addExpense = async (req, res) => {
-    const { title, amount, category, date, description, user } = req.body;
-
+    const { amount, category, date, description } = req.body;
+    const user = req.user.id;  // Assuming you have middleware to add user to req
     // Server-side validations
-    if (!title || !category || !date || !amount) {
+    if ( !category || !date || !amount) {
         return res.status(400).json({ message: "All fields are required" });
     }
-    if (amount <= 0 || typeof amount !== 'number') {
+    if (Number(amount) <= 0) {
         return res.status(400).json({ message: "Amount must be a positive number" });
     }
 
     const expense = new Expense({
-        title,
         amount,
         category,
         date,
