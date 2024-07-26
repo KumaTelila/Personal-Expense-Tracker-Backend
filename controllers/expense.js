@@ -67,7 +67,6 @@ exports.updateExpense = async (req, res) => {
         }
 
         // Update the expense details
-        expense.title = title;
         expense.amount = amount;
         expense.category = category;
         expense.date = date;
