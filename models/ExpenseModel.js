@@ -28,7 +28,8 @@ const ExpenseSchema = new mongoose.Schema({
     description: {
         type: String,
         maxlength: 255
-    }
+    },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 
 }, {timestamps: true})
 
