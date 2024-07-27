@@ -12,7 +12,7 @@ const IP = process.env.IP || 'localhost';
 
 // middleware
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 //routes
 // app.use('/users', require('./routes/users'));

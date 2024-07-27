@@ -3,17 +3,6 @@ const User = require('../models/UserModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// get user 
-exports.getUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
-  } catch (error) {
-    console.error('Error fetching user information:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
 // Register User
 exports.registerUser = async (req, res) => {
     const errors = validationResult(req);
@@ -76,18 +65,18 @@ exports.loginUser = async (req, res) => {
 
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                customCategories: user.customCategories
             }
         };
 
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' }, (err, token) => {
             if (err) throw err;
-            res.status(200).json({ token, user: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                customCategories: user.customCategories
-            } });
+            res.status(200).json({
+                token
+            });
         });
 
     } catch (error) {
