@@ -1,7 +1,7 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { addExpense, getExpenses, getExpenseById, updateExpense, deleteExpense } = require('../controllers/expense');
-const { registerUser, loginUser } = require('../controllers/user');
+const { registerUser, loginUser, getUser } = require('../controllers/user');
 const auth = require('../Auth/auth');
 const router = express.Router();
 const validateExpense = ()=>{
@@ -29,6 +29,9 @@ const validateUserLogin = () => {
 //user routes
 router.post('/register', validateUserRegistration(), registerUser);
 router.post('/login', validateUserLogin(), loginUser);
+
+//get user
+router.get('/user', auth, getUser);
 
 // expense routes
 router.post('/add-expense', auth, validateExpense(), addExpense);
