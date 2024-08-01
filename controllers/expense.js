@@ -3,7 +3,7 @@ const { format } = require('date-fns');
 
 exports.addExpense = async (req, res) => {
     const { amount, category, date, description } = req.body;
-    const user = req.user.id;  // Assuming you have middleware to add user to req
+    const user = req.user.id;  
     // Server-side validations
     if ( !category || !date || !amount) {
         return res.status(400).json({ message: "All fields are required" });
@@ -55,13 +55,13 @@ exports.getExpenseById = async (req, res) => {
     }
 };
 exports.updateExpense = async (req, res) => {
-    const { title, amount, category, date, description } = req.body;
+    const {amount, category, date, description } = req.body;
 
     // Server-side validations
-    if (!title || !category || !date || !amount) {
+    if (!category || !date || !amount) {
         return res.status(400).json({ message: "All fields are required" });
     }
-    if (amount <= 0 || typeof amount !== 'number') {
+    if (Number(amount) <= 0) {
         return res.status(400).json({ message: "Amount must be a positive number" });
     }
 

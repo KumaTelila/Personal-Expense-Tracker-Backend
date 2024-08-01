@@ -34,7 +34,7 @@ router.post('/login', validateUserLogin(), loginUser);
 router.post('/add-expense', auth, validateExpense(), addExpense);
 router.get('/expenses', auth, getExpenses);
 router.get('/expenses/:id', auth, getExpenseById);
-router.put('/update-expenses/:id', auth, validateExpense(), updateExpense);
+router.put('/expenses/:id', auth, validateExpense(), updateExpense);
 router.delete('/expenses/:id', auth, deleteExpense);
 
 module.exports = router;
