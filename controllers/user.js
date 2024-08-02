@@ -45,7 +45,7 @@ exports.registerUser = async (req, res) => {
         user = new User({
             name,
             email,
-            password: await bcrypt.hash(password, 12) // Hash password before saving
+            password
         });
 
         await user.save();
