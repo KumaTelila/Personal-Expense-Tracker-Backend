@@ -10,7 +10,7 @@ exports.getUser = async (req, res) => {
         const userId = req.params.id;
 
         // Find the user by ID and exclude the password field
-        const user = await User.findById(userId).select('-password');
+        const user = await User.findById(userId);
 
         // Check if user is found
         if (!user) {
@@ -117,18 +117,18 @@ exports.updateUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
-        const user = await User.findById(req.user.id);
+    const userId = req.params.id;
+
+        const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
         user.name = name || user.name;
         user.email = email || user.email;
+        user.password = password || user.password;
         
-        if (password) {
-            user.password = await bcrypt.hash(password, 12); // Hash new password before saving
-        }
-
+        
         await user.save();  
         res.status(200).json({ message: 'User updated successfully' });
     } catch (error) {

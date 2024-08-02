@@ -32,7 +32,7 @@ const validateUserLogin = () => {
 router.post('/register', validateUserRegistration(), registerUser);
 router.post('/login', validateUserLogin(), loginUser);
 router.get('/users/:id',  getUser);
-router.put('/users/:id', validateUserRegistration(), auth, updateUser);
+router.put('/users/:id', validateUserRegistration(), updateUser);
 
 // expense routes
 router.post('/add-expense', auth, validateExpense(), addExpense);
