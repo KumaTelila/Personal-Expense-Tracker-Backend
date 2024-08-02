@@ -52,7 +52,10 @@ exports.registerUser = async (req, res) => {
 
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                customCategories: user.customCategor
             }
         };
 
