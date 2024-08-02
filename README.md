@@ -39,9 +39,11 @@ Create a `.env` file in the root directory of the project and add the following 
 
 ```
 PORT=5000
+IP=127.0.0.1
 MONGO_URI= your_mongo_string_url
 JWT_SECRET=your_jwt_secret
 ```
+You can use env.example file by renaming it to .env
 
 ### Run the Application
 
