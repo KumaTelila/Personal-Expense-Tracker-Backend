@@ -1,7 +1,7 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { addExpense, getExpenses, getExpenseById, updateExpense, deleteExpense } = require('../controllers/expense');
-const { registerUser, loginUser, getUser } = require('../controllers/user');
+const { registerUser, loginUser, getUser, updateUser } = require('../controllers/user');
 const auth = require('../Auth/auth');
 const router = express.Router();
 const validateExpense = ()=>{
@@ -26,9 +26,13 @@ const validateUserLogin = () => {
         check('password').exists().withMessage('Password is required')
     ]
 }
+
+
 //user routes
 router.post('/register', validateUserRegistration(), registerUser);
 router.post('/login', validateUserLogin(), loginUser);
+router.get('/users/:id', auth, getUser);
+router.put('/users/:id', validateUserRegistration(), auth, updateUser);
 
 // expense routes
 router.post('/add-expense', auth, validateExpense(), addExpense);
