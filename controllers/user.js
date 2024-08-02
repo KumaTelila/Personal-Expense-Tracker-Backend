@@ -6,16 +6,26 @@ const jwt = require('jsonwebtoken');
 // Get User
 exports.getUser = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id).select('-password');
+        // Fetch the user ID from request parameters
+        const userId = req.params.id;
+
+        // Find the user by ID and exclude the password field
+        const user = await User.findById(userId).select('-password');
+
+        // Check if user is found
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.json(user);
+
+        // Respond with the user data
+        res.status(200).json(user);
     } catch (error) {
         console.error('Error getting user:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+
 
 // Register User
 exports.registerUser = async (req, res) => {
